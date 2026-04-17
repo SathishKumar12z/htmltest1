@@ -8,15 +8,17 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Build Docker Image') {
             steps {
-                echo 'Building project...'
+                echo 'Building Docker image...'
+                sh 'docker build -t my-html-app .'
             }
         }
 
-        stage('Test') {
+        stage('Run Container') {
             steps {
-                echo 'Running tests...'
+                echo 'Running container...'
+                sh 'docker run -d -p 8081:80 my-html-app'
             }
         }
     }
